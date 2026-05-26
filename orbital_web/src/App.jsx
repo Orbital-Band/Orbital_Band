@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import heroImg from './assets/hero.png'
+import heroImg from './assets/Orbital_Banner.jpeg'
 import './App.css'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -54,7 +54,7 @@ const HomePageContent = () => (
 function App() {
   // Determinar la página inicial basada en la URL actual
   const getPageFromLocation = () => {
-    const path = window.location.pathname;
+    const path = window.location.hash;
     return path.endsWith('/Tienda') ? 'shop' : 'home';
   };
 
@@ -72,8 +72,7 @@ function App() {
   // Función para cambiar de página y actualizar la URL
   const handleNavigation = (page) => {
     const baseUrl = '/Orbital_Band'; // Base de tu repo en GitHub Pages
-    const newPath = page === 'shop' ? `${baseUrl}/Tienda` : `${baseUrl}/`;
-    
+    const newPath = page === 'shop' ? '#/Tienda' : '#/';    
     window.history.pushState({}, '', newPath);
     setCurrentPage(page);
     window.scrollTo(0, 0); // Opcional: volver arriba al cambiar de vista
