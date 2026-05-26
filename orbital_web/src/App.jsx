@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import heroImg from './assets/hero.png'
 import './App.css'
 import Navbar from './components/Navbar';
@@ -52,7 +52,32 @@ const HomePageContent = () => (
 );
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  // Determinar la página inicial basada en la URL actual
+  const getPageFromLocation = () => {
+    const path = window.location.pathname;
+    return path.endsWith('/Tienda') ? 'shop' : 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState(getPageFromLocation);
+
+  // Escuchar cambios en la navegación del navegador (botón atrás/adelante)
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(getPageFromLocation());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Función para cambiar de página y actualizar la URL
+  const handleNavigation = (page) => {
+    const baseUrl = '/Orbital_Band'; // Base de tu repo en GitHub Pages
+    const newPath = page === 'shop' ? `${baseUrl}/Tienda` : `${baseUrl}/`;
+    
+    window.history.pushState({}, '', newPath);
+    setCurrentPage(page);
+    window.scrollTo(0, 0); // Opcional: volver arriba al cambiar de vista
+  };
 
   const renderPageContent = () => {
     switch (currentPage) {
@@ -67,7 +92,7 @@ function App() {
 
   return (
     <div data-theme="orbitheme" className="min-h-screen relative pb-32">
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Navbar currentPage={currentPage} setCurrentPage={handleNavigation} />
       {renderPageContent()}
       <Footer />
     </div>
