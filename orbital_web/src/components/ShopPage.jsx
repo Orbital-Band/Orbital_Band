@@ -53,25 +53,27 @@ const ShopPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen bg-base-300">
-      <h1 className="text-5xl font-bold text-center mb-10">Nuestra Tienda</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <ProductCard 
-              key={product.id} 
-              product={product}
-              idKey="id" 
-              titleKey="Title"
-              detailsKey="Detalles" // Asegúrate de que esta columna exista en Supabase
-              typeKey="Tipo"        // Asegúrate de que esta columna exista en Supabase
-              stockKey="Existencias" // Asegúrate de que esta columna exista en Supabase
-              priceKey="Precio"      // Asegúrate de que esta columna exista en Supabase
-            />
-          ))
-        ) : (
-          <p className="text-center text-xl col-span-full">No se han encontrado productos.</p>
-        )}
+    <div className="w-full bg-base-300 min-h-screen py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-5xl font-bold text-center mb-10">Nuestra Tienda</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product}
+                idKey="id" 
+                titleKey="Title"
+                detailsKey="Detalles"
+                typeKey="Tipo"
+                stockKey="Existencias"
+                priceKey="Precio"
+              />
+            ))
+          ) : (
+            <p className="text-center text-xl col-span-full">No se han encontrado productos.</p>
+          )}
+        </div>
       </div>
     </div>
   );

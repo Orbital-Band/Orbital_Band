@@ -19,7 +19,7 @@ const ProductCard = ({
         <img 
           src={product[imageKey] || placeholderImage} 
           alt={product[titleKey]} 
-          className="w-full h-48 object-cover"
+          className="w-full h-60 object-cover"
         />
       </figure>
       <div className="card-body">
@@ -37,9 +37,7 @@ const ProductCard = ({
             <span className="text-xs uppercase font-bold opacity-50">Stock: {product[stockKey]} unidades</span>
             <span className="text-3xl font-bold text-accent">${product[priceKey]}</span>
           </div>
-          
-        
-        </div>
+          </div>
 
         <div className="card-actions justify-end mt-4">
           <button className="btn btn-primary">Comprar</button>
