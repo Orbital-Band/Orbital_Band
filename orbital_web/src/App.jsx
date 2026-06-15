@@ -1,18 +1,133 @@
-import React, { useState, useEffect } from 'react';
-import heroImg from './assets/Orbital_Banner.jpeg'
+import React, { useState, useEffect, useRef } from 'react';
+import { animate, createScope, spring, svg } from 'animejs';
 import './App.css'
+import logoImg from './assets/Orbital_Logo.png';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ShopPage from './components/ShopPage';
 
-const HomePageContent = () => (
-  <>
+const HomePageContent = () => {
+  const root = useRef(null);
+
+  // Configuración de las órbitas para fácil gestión y expansión
+  const orbitConfigs = [
+    { 
+      id: '1', 
+      inclination: '15deg', 
+      x: '2', y: '2', 
+      w0: '0.65', w50: '0.5', 
+      pMax: '2.5', pMin: '0.4', 
+      delay: 0 
+    },
+    { 
+      id: '2', 
+      inclination: '-15deg', 
+      x: '1.5', y: '1.6', 
+      w0: '0.65', w50: '0.5', 
+      pMax: '2.5', pMin: '0.4', 
+      delay: 1000 
+    },
+    { 
+      id: '3', 
+      inclination: '-95deg', 
+      x: '1', y: '1', 
+      w0: '0.65', w50: '0.5', 
+      pMax: '2.5', pMin: '0.4', 
+      delay: 2000 
+    }
+  ];
+
+  useEffect(() => {
+    // Iniciamos el scope de animejs v4 vinculado al ref del contenedor
+    const scope = createScope({ root }).add(() => {
+      animate('.hero-title', {
+        scale: [
+          { to: 1.25, ease: 'inOut(3)', duration: 200 },
+          { to: 1, ease: spring({ bounce: .7 }) }
+        ],
+        loop: true,
+        loopDelay: 250,
+      });
+
+      // Animación de las partículas siguiendo sus respectivos caminos
+      const orbitContainers = root.current.querySelectorAll('.Orbit_element');
+      orbitContainers.forEach((container) => {
+        const path = container.querySelector('.orbit-path');
+        const particle = container.querySelector('.orbit-particle');
+        const styles = getComputedStyle(container);
+        
+        const pMax = parseFloat(styles.getPropertyValue('--particle-size-max')) || 2.5;
+        const pMin = parseFloat(styles.getPropertyValue('--particle-size-min')) || 0.4;
+        const delay = parseFloat(styles.getPropertyValue('--orbit-delay')) || 0;
+
+        animate(particle, {
+          ease: 'linear',
+          duration: 3000,
+          loop: true,
+          ...svg.createMotionPath(path),
+          // Variación de tamaño sincronizada con el recorrido (0% -> max, 50% -> min, 100% -> max)
+          scale: [
+            { to: pMax, duration: 0 },
+            { to: pMin, duration: 1500 },
+            { to: pMax, duration: 1500 }
+          ],
+          delay: delay
+        });
+      });
+
+    });
+    return () => scope.revert(); // Limpieza al desmontar
+  }, []);
+
+  return (
+    <div ref={root}>
     {/* Sección 1: Hero Principal */}
-    <div id="top" className="hero min-h-screen" style={{ backgroundImage: `url(${heroImg})` }}>
-      <div className="hero-overlay bg-opacity-60"></div>
-      <div className="hero-content text-neutral-content text-center">
+    <div id="top" className="hero min-h-screen relative overflow-hidden">
+      <div className="stars-container">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        <div></div>
+      </div>
+      {/* Sección de Órbitas: Elipses y Partículas */}
+      {orbitConfigs.map((orbit) => (
+        <div key={orbit.id} className="Orbit_element absolute inset-0 pointer-events-none flex items-center justify-center z-0 opacity-100" 
+             style={{ 
+               '--orbit-inclination': orbit.inclination,
+               '--orbit-x': orbit.x, 
+               '--orbit-y': orbit.y,
+               '--orbit-w0': orbit.w0,
+               '--orbit-w50': orbit.w50,
+               '--particle-size-max': orbit.pMax,
+               '--particle-size-min': orbit.pMin,
+               '--orbit-delay': orbit.delay
+             }}>
+          <div className="relative w-full max-w-5xl aspect-[3/1] flex items-center justify-center max-h-full">
+            <svg viewBox="0 0 300 100" className="w-full h-full overflow-visible">
+              <defs>
+                <linearGradient id={`orbitGradient${orbit.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{ stopColor: 'white', stopOpacity: 'var(--orbit-w0)' }} />
+                  <stop offset="100%" style={{ stopColor: 'white', stopOpacity: 'var(--orbit-w50)' }} />
+                </linearGradient>
+                <filter id={`variableWidth${orbit.id}`}>
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur" />
+                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="contrast" />
+                </filter>
+              </defs>
+              <path 
+                className="orbit-path" 
+                d="M 10, 50 a 140,40 0 1,0 280,0 a 140,40 0 1,0 -280,0" 
+                fill="none" 
+                style={{ stroke: `url(#orbitGradient${orbit.id})`, filter: `url(#variableWidth${orbit.id})` }}
+              />
+            </svg>
+            <div className="orbit-particle absolute bg-white rounded-full" style={{ left: 0, top: 0 }}></div>
+          </div>
+        </div>
+      ))}
+      <div className="hero-content text-neutral-content text-center z-10">
         <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold uppercase tracking-widest">Orbital Band</h1>
+          <img src={logoImg} alt="Orbital Band Logo" className="hero-title mb-5 mx-auto w-64 md:w-120 h-auto logo-shadow" />
           <p className="mb-5">Experimentando el sonido del universo a través de nuestra música.</p>
           <button className="btn btn-primary">Escuchar Ahora</button>
         </div>
@@ -48,8 +163,9 @@ const HomePageContent = () => (
         </div>
       </div>
     </div>
-  </>
-);
+    </div>
+  );
+};
 
 function App() {
   // Determinar la página inicial basada en la URL actual
@@ -62,6 +178,14 @@ function App() {
 
   // Escuchar cambios en la navegación del navegador (botón atrás/adelante)
   useEffect(() => {
+    // Forzar scroll al inicio al cargar la página
+    window.scrollTo(0, 0);
+    
+    // Desactivar la restauración automática del scroll del navegador
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     const handlePopState = () => {
       setCurrentPage(getPageFromLocation());
     };
