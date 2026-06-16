@@ -61,6 +61,13 @@
   }
 }
 
+#top {
+  @media (max-width: 1024px) {
+    max-height: 750px; /* Ajusta este valor (ej. 500px, 600px) según tu preferencia */
+    min-height: 600px;  /* Esto permite que el alto máximo prevalezca sobre el min-h-screen de Tailwind */
+  }
+}
+
 #center {
   display: flex;
   flex-direction: column;
