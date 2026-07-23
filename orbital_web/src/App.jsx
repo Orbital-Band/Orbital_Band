@@ -11,29 +11,29 @@ const HomePageContent = () => {
 
   // Configuración de las órbitas para fácil gestión y expansión
   const orbitConfigs = [
-    { 
-      id: '1', 
-      inclination: '15deg', 
-      x: '2', y: '2', 
-      w0: '0.65', w50: '0.5', 
-      pMax: '2.5', pMin: '0.4', 
-      delay: 0 
+    {
+      id: '1',
+      inclination: '15deg',
+      x: '2', y: '2',
+      w0: '0.65', w50: '0.5',
+      pMax: '2.5', pMin: '0.4',
+      delay: 0
     },
-    { 
-      id: '2', 
-      inclination: '-15deg', 
-      x: '1.5', y: '1.6', 
-      w0: '0.65', w50: '0.5', 
-      pMax: '2.5', pMin: '0.4', 
-      delay: 1000 
+    {
+      id: '2',
+      inclination: '-15deg',
+      x: '1.5', y: '1.6',
+      w0: '0.65', w50: '0.5',
+      pMax: '2.5', pMin: '0.4',
+      delay: 1000
     },
-    { 
-      id: '3', 
-      inclination: '-95deg', 
-      x: '1', y: '1', 
-      w0: '0.65', w50: '0.5', 
-      pMax: '2.5', pMin: '0.4', 
-      delay: 2000 
+    {
+      id: '3',
+      inclination: '-95deg',
+      x: '1', y: '1',
+      w0: '0.65', w50: '0.5',
+      pMax: '2.5', pMin: '0.4',
+      delay: 2000
     }
   ];
 
@@ -55,7 +55,7 @@ const HomePageContent = () => {
         const path = container.querySelector('.orbit-path');
         const particle = container.querySelector('.orbit-particle');
         const styles = getComputedStyle(container);
-        
+
         const pMax = parseFloat(styles.getPropertyValue('--particle-size-max')) || 2.5;
         const pMin = parseFloat(styles.getPropertyValue('--particle-size-min')) || 0.4;
         const delay = parseFloat(styles.getPropertyValue('--orbit-delay')) || 0;
@@ -81,88 +81,177 @@ const HomePageContent = () => {
 
   return (
     <div ref={root}>
-    {/* Sección 1: Hero Principal */}
-    <div id="top" className="hero w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center">
-      <div className="stars-container">
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-        <div></div>
-      </div>
-      {/* Sección de Órbitas: Elipses y Partículas */}
-      {orbitConfigs.map((orbit) => (
-        <div key={orbit.id} className="Orbit_element absolute inset-0 pointer-events-none flex items-center justify-center z-0 opacity-100" 
-             style={{ 
-               '--orbit-inclination': orbit.inclination,
-               '--orbit-x': orbit.x, 
-               '--orbit-y': orbit.y,
-               '--orbit-w0': orbit.w0,
-               '--orbit-w50': orbit.w50,
-               '--particle-size-max': orbit.pMax,
-               '--particle-size-min': orbit.pMin,
-               '--orbit-delay': orbit.delay
-             }}>
-          <div className="relative w-full max-w-5xl aspect-[3/1] flex items-center justify-center max-h-full">
-            <svg viewBox="0 0 300 100" className="w-full h-full overflow-visible">
-              <defs>
-                <linearGradient id={`orbitGradient${orbit.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style={{ stopColor: 'white', stopOpacity: 'var(--orbit-w0)' }} />
-                  <stop offset="100%" style={{ stopColor: 'white', stopOpacity: 'var(--orbit-w50)' }} />
-                </linearGradient>
-                <filter id={`variableWidth${orbit.id}`}>
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur" />
-                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="contrast" />
-                </filter>
-              </defs>
-              <path 
-                className="orbit-path" 
-                d="M 10, 50 a 140,40 0 1,0 280,0 a 140,40 0 1,0 -280,0" 
-                fill="none" 
-                style={{ stroke: `url(#orbitGradient${orbit.id})`, filter: `url(#variableWidth${orbit.id})` }}
-              />
-            </svg>
-            <div className="orbit-particle absolute bg-white rounded-full" style={{ left: 0, top: 0 }}></div>
+      {/* Sección 1: Hero Principal */}
+      <div id="top" className="hero w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center">
+        <div className="stars-container">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div></div>
+        </div>
+        {/* Sección de Órbitas: Elipses y Partículas */}
+        {orbitConfigs.map((orbit) => (
+          <div key={orbit.id} className="Orbit_element absolute inset-0 pointer-events-none flex items-center justify-center z-0 opacity-100"
+            style={{
+              '--orbit-inclination': orbit.inclination,
+              '--orbit-x': orbit.x,
+              '--orbit-y': orbit.y,
+              '--orbit-w0': orbit.w0,
+              '--orbit-w50': orbit.w50,
+              '--particle-size-max': orbit.pMax,
+              '--particle-size-min': orbit.pMin,
+              '--orbit-delay': orbit.delay
+            }}>
+            <div className="relative w-full max-w-5xl aspect-[3/1] flex items-center justify-center max-h-full">
+              <svg viewBox="0 0 300 100" className="w-full h-full overflow-visible">
+                <defs>
+                  <linearGradient id={`orbitGradient${orbit.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{ stopColor: 'white', stopOpacity: 'var(--orbit-w0)' }} />
+                    <stop offset="100%" style={{ stopColor: 'white', stopOpacity: 'var(--orbit-w50)' }} />
+                  </linearGradient>
+                  <filter id={`variableWidth${orbit.id}`}>
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="contrast" />
+                  </filter>
+                </defs>
+                <path
+                  className="orbit-path"
+                  d="M 10, 50 a 140,40 0 1,0 280,0 a 140,40 0 1,0 -280,0"
+                  fill="none"
+                  style={{ stroke: `url(#orbitGradient${orbit.id})`, filter: `url(#variableWidth${orbit.id})` }}
+                />
+              </svg>
+              <div className="orbit-particle absolute bg-white rounded-full" style={{ left: 0, top: 0 }}></div>
+            </div>
+          </div>
+        ))}
+        <div className="hero-content text-neutral-content text-center z-10">
+          <div className="max-w-md">
+            <img src={logoImg} alt="Orbital Band Logo" className="hero-title mb-5 mx-auto w-64 md:w-120 h-auto logo-shadow" />
+            <p className="text-xl md:text-2xl">Música como energía; girando en trayectorias impredecibles.</p>
+            <button className="btn btn-primary">Escuchar Ahora</button>
           </div>
         </div>
-      ))}
-      <div className="hero-content text-neutral-content text-center z-10">
-        <div className="max-w-md">
-          <img src={logoImg} alt="Orbital Band Logo" className="hero-title mb-5 mx-auto w-64 md:w-120 h-auto logo-shadow" />
-          <p className="mb-5">Experimentando el sonido del universo a través de nuestra música.</p>
-          <button className="btn btn-primary">Escuchar Ahora</button>
-        </div>
       </div>
-    </div>
 
-    {/* Sección 2: Bio */}
-    <div className="hero bg-base-200 min-h-[50vh] py-20">
-      <div className="hero-content flex-col lg:flex-row gap-10">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
-          className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
-          alt="Música Orbital" />
-        <div className="text-center lg:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold">Música como energía.</h1>
-          <p className="py-6">Girando en trayectorias impredecibles. Somos una banda de alternative metal & punk crossover con un fuerte tinte de heavy-pop-punk y rock alternativo.</p>
-          <button className="btn btn-secondary">Conócenos</button>
-        </div>
-      </div>
-    </div>
+      {/* Sección 2: Bio */}
+      <div className="hero bg-base-200 min-h-[20vh] py-2">
+        <div className="hero-content flex-col lg:flex-row gap-10">
 
-    {/* Sección 3: Conciertos */}
-    <div className="hero w-full bg-base-100 min-h-[50vh] py-20 flex items-center justify-center overflow-hidden">
-      <div className="hero-content w-full px-4 flex-col lg:flex-row-reverse gap-10">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
-          className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
-          alt="Gira Orbital" />
-        <div className="text-center lg:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold">Próximos Conciertos</h1>
-          <p className="py-6">No te pierdas nuestra próxima gira interestelar. Estaremos recorriendo las principales ciudades este verano.</p>
-          <button className="btn btn-accent">Ver Fechas</button>
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold">Somos una banda de alternative metal & punk crossover con un fuerte tinte de heavy-pop-punk y rock alternativo.</h1>
+            <p className="text-4xl md:text-5xl font-bold"></p>
+          </div>
         </div>
       </div>
-    </div>
+      {/* Sección 3: Conciertos */}
+      <div className="hero w-full bg-base-100 min-h-[50vh] py-20 flex items-center justify-center overflow-hidden">
+        <div className="hero-content w-full px-4 flex-col lg:flex-row-reverse gap-10">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+            className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
+            alt="Gira Orbital" />
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold">¿POR QUÉ ORBITAL?</h1>
+            <p className="py-6">Encontramos en los orbitales una metáfora de
+              quienes éramos: partículas moviéndose en
+              distintas trayectorias, explorando caminos
+              propios, pero siempre unidas por un mismo centro.
+              Orbital representa ese movimiento constante.
+              Porque pertenecemos al mismo núcleo.
+              Y, aunque cada uno recorra una trayectoria
+              distinta, seguimos orbitando un mismo universo.</p>
+            {/* <button className="btn btn-accent">Ver Fechas</button> */}
+          </div>
+        </div>
+      </div>
+
+      {/* Sección 2: Bio */}
+      <div className="hero bg-base-200 min-h-[50vh] py-20">
+        <div className="hero-content flex-col lg:flex-row gap-10">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+            className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
+            alt="Música Orbital" />
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold">BIOGRAFÍA</h1>
+            <p className="py-6">Orbital es una banda originaria de Texcoco, Estado de México, que
+              fusiona la energía del punk rock y el metal alternativo con
+              influencias del pop, el indie y el rock latino, dando vida a un sonido
+              potente, melódico y dinámico. Tomamos la energía del punk, la
+              sensibilidad del pop y la libertad del rock alternativo para
+              construir un sonido propio.
+              nuestro repertorio combina reinterpretaciones de canciones que
+              han marcado a distintas generaciones con composiciones
+              originales que reflejan quiénes somos. cada arreglo busca
+              aportar una nueva perspectiva, manteniendo siempre la esencia
+              emocional de la música.
+              creemos que las canciones cuentan historias. por eso escribimos
+              sobre nuestras experiencias, nuestros sentimientos y los momentos que nos han transformado, llevando cada una de esas
+              historias al escenario con la intención de crear un a conexión genuina con el público.</p>
+            {/* <button className="btn btn-secondary">Conócenos</button> */}
+          </div>
+        </div>
+      </div>
+
+
+      {/* Sección 3: Conciertos */}
+      <div className="hero w-full bg-base-100 min-h-[50vh] py-20 flex items-center justify-center overflow-hidden">
+        <div className="hero-content w-full px-4 flex-col lg:flex-row-reverse gap-10">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+            className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
+            alt="Gira Orbital" />
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold">TRAYECTORIA</h1>
+            <p className="py-6">Desde 2020 hemos recorrido distintos escenarios
+              llevando esa forma de entender la música.
+              Nos hemos presentado en bares, foros independientes y eventos privados, así como en
+              conciertos con causa destinados a apoyar el bienestar animal, convencidos de que la música
+              también puede convertirse en una forma de compartir, ayudar y reunir personas.
+              Cada escenario ha sido una nueva órbita; cada público, una historia distinta que nos ha permitido
+              crecer y reafirmar el motivo por el que hacemos música.</p>
+            {/* <button className="btn btn-accent">Ver Fechas</button> */}
+          </div>
+        </div>
+      </div>
+
+      {/* Sección 2: Bio */}
+      <div className="hero bg-base-200 min-h-[50vh] py-20">
+        <div className="hero-content flex-col lg:flex-row gap-10">
+          {/* <img
+            src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+            className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
+            alt="Música Orbital" /> */}
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold">MIEMBROS</h1>
+            <p className="text-xl md:text-xl font-bold">LINES - VOZ</p>
+            <p className="text-xl md:text-xl font-bold">SACRO - BAJO</p>
+            <p className="text-xl md:text-xl font-bold">EDY - GUITARRA SOLISTA</p>
+            <p className="text-xl md:text-xl font-bold">CID - GUITARRA RITMICA</p>
+            <p className="text-xl md:text-xl font-bold">CARLOS - BATERÍA</p>
+            <p className="text-xl md:text-xl font-bold">BAZILI - VIOLIN</p>
+            {/* <button className="btn btn-secondary">Conócenos</button> */}
+          </div>
+        </div>
+      </div>
+
+      {/* Sección 3: Conciertos */}
+      <div className="hero w-full bg-base-100 min-h-[50vh] py-20 flex items-center justify-center overflow-hidden">
+        <div className="hero-content w-full px-4 flex-col lg:flex-row-reverse gap-10">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+            className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
+            alt="Gira Orbital" />
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold">Próximos Conciertos</h1>
+            <p className="py-6">No te pierdas nuestra próxima gira interestelar. Estaremos recorriendo las principales ciudades este verano.</p>
+            <button className="btn btn-accent">Ver Fechas</button>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   );
 };
@@ -180,7 +269,7 @@ function App() {
   useEffect(() => {
     // Forzar scroll al inicio al cargar la página
     window.scrollTo(0, 0);
-    
+
     // Desactivar la restauración automática del scroll del navegador
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -196,7 +285,7 @@ function App() {
   // Función para cambiar de página y actualizar la URL
   const handleNavigation = (page) => {
     const baseUrl = '/Orbital_Band'; // Base de tu repo en GitHub Pages
-    const newPath = page === 'shop' ? '#/Tienda' : '#/';    
+    const newPath = page === 'shop' ? '#/Tienda' : '#/';
     window.history.pushState({}, '', newPath);
     setCurrentPage(page);
     window.scrollTo(0, 0); // Opcional: volver arriba al cambiar de vista
