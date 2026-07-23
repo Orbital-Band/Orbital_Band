@@ -135,7 +135,11 @@ const HomePageContent = () => {
       </div>
 
       {/* Sección 2: Bio */}
-      <div className="hero bg-base-200 min-h-[20vh] py-2">
+      <div className="hero bg-base-200 min-h-[20vh] py-2" style={{
+        background: "linear-gradient(#1d1d1dff, #df6a1cff)",
+        boxShadow: " 0px 0px 250px #1d1d1dff",
+      }}>
+
         <div className="hero-content flex-col lg:flex-row gap-10">
 
           <div className="text-center lg:text-left">
