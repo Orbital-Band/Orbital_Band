@@ -127,9 +127,20 @@ const HomePageContent = () => {
         ))}
         <div className="hero-content text-neutral-content text-center z-10">
           <div className="max-w-md">
-            <img src={logoImg} alt="Orbital Band Logo" className="hero-title mb-5 mx-auto w-64 md:w-120 h-auto logo-shadow" />
-            <p className="text-xl md:text-2xl">Música como energía; girando en trayectorias impredecibles.</p>
-            <button className="btn btn-primary">Escuchar Ahora</button>
+            <img src={logoImg} alt="Orbital Band Logo" className="hero-title mb-10 mx-auto w-64 md:w-120 h-auto logo-shadow" />
+            <div className="text-center lg:text-center" style={{
+              color: "white",
+              textShadow: " 0px 3px 15px #1a1a1aff , 0px 3px 15px #1a1a1aff, 0px 3px 15px #1a1a1aff"
+
+            }}>
+              <p className="text-xl md:text-3xl font-bold">Música como energía; girando en trayectorias impredecibles.</p>
+
+              {/* <button className="btn btn-secondary">Conócenos</button> */}
+            </div>
+
+            <div className="aura aura-silver mt-9">
+              <button className="btn btn-primary">Escuchar Ahora</button>
+            </div>
           </div>
         </div>
       </div>
