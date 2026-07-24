@@ -137,16 +137,16 @@ const HomePageContent = () => {
 
               {/* <button className="btn btn-secondary">Conócenos</button> */}
             </div>
+            <div className="flex gap-2 justify-center flex-wrap">
+              <div className="aura aura-silver mt-9">
+                <button className="btn btn-primary">Escuchar Ahora</button>
+              </div>
 
-            <div className="aura aura-silver mt-9">
-              <button className="btn btn-primary">Escuchar Ahora</button>
+              <div className="aura aura-silver mt-9">
+                <a href="https://raw.githubusercontent.com/Orbital-Band/Orbital_Band/refs/heads/main/orbital_web/public/BORRADOR%202.pdf" target="_blank" rel="noopener noreferrer" className="btn bg-[#1A1A1A] text-[#F2F2F2] border-[#FF8921]">Presskit</a>
+              </div>
+
             </div>
-
-            <a href="https://discord.gg/2Ecx7sF5" target="_blank" rel="noopener noreferrer" className="aura aura-silver mt-9">
-              <button className="btn">Presskit</button>
-            </a>
-
-
 
           </div>
         </div>
