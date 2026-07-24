@@ -141,6 +141,13 @@ const HomePageContent = () => {
             <div className="aura aura-silver mt-9">
               <button className="btn btn-primary">Escuchar Ahora</button>
             </div>
+
+            <a href="https://discord.gg/2Ecx7sF5" target="_blank" rel="noopener noreferrer" className="aura aura-silver mt-9">
+              <button className="btn">Presskit</button>
+            </a>
+
+
+
           </div>
         </div>
       </div>
