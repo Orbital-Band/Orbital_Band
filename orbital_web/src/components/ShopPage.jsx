@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from './supabaseClient'; // Importa el cliente de Supabase
 import ProductCard from './ProductCard';
+import Product_Fullview from './Product_Fullview';
 
-const ShopPage = () => {
+const ShopPage = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -59,21 +61,37 @@ const ShopPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => (
-              <ProductCard 
-                key={product.id} 
+              <ProductCard
+                key={product.id}
                 product={product}
-                idKey="id" 
+                idKey="id"
                 titleKey="Title"
                 detailsKey="Detalles"
                 typeKey="Tipo"
                 stockKey="Existencias"
                 priceKey="Precio"
+                onClick={() => {
+                  setSelectedProduct(product);
+                  document.getElementById('product_fullview_modal').showModal();
+                }}
+                onAddToCart={onAddToCart}
               />
             ))
           ) : (
             <p className="text-center text-xl col-span-full">No se han encontrado productos.</p>
           )}
         </div>
+        <Product_Fullview
+          product={selectedProduct}
+          modalId="product_fullview_modal"
+          idKey="id"
+          titleKey="Title"
+          detailsKey="Detalles"
+          typeKey="Tipo"
+          stockKey="Existencias"
+          priceKey="Precio"
+          onAddToCart={onAddToCart}
+        />
       </div>
     </div>
   );

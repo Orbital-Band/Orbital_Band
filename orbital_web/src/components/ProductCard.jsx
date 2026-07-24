@@ -8,13 +8,18 @@ const ProductCard = ({
   typeKey = 'tipo',
   stockKey = 'existencias',
   priceKey = 'precio',
-  imageKey = 'imagen_url'
+  imageKey = 'imagen_url',
+  onClick,
+  onAddToCart
 }) => {
   // Imagen genérica mientras se configura el almacenamiento
   const placeholderImage = `https://picsum.photos/seed/${product[idKey]}/400/300`;
 
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-content/5">
+    <div 
+      className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-content/5 cursor-pointer"
+      onClick={onClick}
+    >
       <figure>
         <img 
           src={product[imageKey] || placeholderImage} 
@@ -40,7 +45,15 @@ const ProductCard = ({
           </div>
 
         <div className="card-actions justify-end mt-4">
-          <button className="btn btn-primary">Comprar</button>
+          <button 
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onAddToCart) onAddToCart(product);
+            }}
+          >
+            Comprar
+          </button>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import logoImg from './assets/Orbital_Logo.png';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ShopPage from './components/ShopPage';
+import CheckoutPage from './components/CheckoutPage';
 
 const HomePageContent = () => {
   const root = useRef(null);
@@ -297,10 +298,40 @@ const HomePageContent = () => {
 };
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.product.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevCart, { product, quantity: 1 }];
+    });
+  };
+
+  const updateQuantity = (productId, quantity) => {
+    if (quantity <= 0) {
+      setCart((prevCart) => prevCart.filter((item) => item.product.id !== productId));
+    } else {
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.product.id === productId ? { ...item, quantity } : item
+        )
+      );
+    }
+  };
+
+  const clearCart = () => setCart([]);
+
   // Determinar la página inicial basada en la URL actual
   const getPageFromLocation = () => {
     const path = window.location.hash;
-    return path.endsWith('/Tienda') ? 'shop' : 'home';
+    if (path.endsWith('/Tienda')) return 'shop';
+    if (path.endsWith('/Checkout')) return 'checkout';
+    return 'home';
   };
 
   const [currentPage, setCurrentPage] = useState(getPageFromLocation);
@@ -325,7 +356,9 @@ function App() {
   // Función para cambiar de página y actualizar la URL
   const handleNavigation = (page) => {
     const baseUrl = '/Orbital_Band'; // Base de tu repo en GitHub Pages
-    const newPath = page === 'shop' ? '#/Tienda' : '#/';
+    let newPath = '#/';
+    if (page === 'shop') newPath = '#/Tienda';
+    if (page === 'checkout') newPath = '#/Checkout';
     window.history.pushState({}, '', newPath);
     setCurrentPage(page);
     window.scrollTo(0, 0); // Opcional: volver arriba al cambiar de vista
@@ -336,7 +369,16 @@ function App() {
       case 'home':
         return <HomePageContent />;
       case 'shop':
-        return <ShopPage />;
+        return <ShopPage onAddToCart={addToCart} />;
+      case 'checkout':
+        return (
+          <CheckoutPage
+            cart={cart}
+            updateQuantity={updateQuantity}
+            onNavigate={handleNavigation}
+            clearCart={clearCart}
+          />
+        );
       default:
         return null; // Puedes añadir una página 404 aquí
     }
@@ -344,7 +386,7 @@ function App() {
 
   return (
     <div data-theme="orbitheme" className="min-h-screen relative pb-32">
-      <Navbar currentPage={currentPage} setCurrentPage={handleNavigation} />
+      <Navbar currentPage={currentPage} setCurrentPage={handleNavigation} cart={cart} />
       {renderPageContent()}
       <Footer />
     </div>
