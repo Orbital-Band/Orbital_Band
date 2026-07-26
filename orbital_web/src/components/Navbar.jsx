@@ -9,6 +9,7 @@ const Navbar = ({ currentPage, setCurrentPage, cart = [] }) => {
       <div className="flex-1">
         {/* Los enlaces ahora usan setCurrentPage para cambiar la vista */}
         <a className="btn btn-ghost text-xl" onClick={() => setCurrentPage('home')}>Inicio</a>
+        <a className="btn btn-ghost" onClick={() => setCurrentPage('gallery')}>Galería</a>
         <a className="btn btn-ghost" onClick={() => setCurrentPage('shop')}>Tienda</a>
         <a className="btn btn-ghost" href="#footer">Contacto</a>
       </div>

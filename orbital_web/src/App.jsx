@@ -6,8 +6,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ShopPage from './components/ShopPage';
 import CheckoutPage from './components/CheckoutPage';
+import Gallery from './components/Gallery';
 
-const HomePageContent = () => {
+const HomePageContent = ({ onNavigate }) => {
   const root = useRef(null);
 
   // Configuración de las órbitas para fácil gestión y expansión
@@ -140,7 +141,7 @@ const HomePageContent = () => {
             </div>
             <div className="flex gap-2 justify-center flex-wrap">
               <div className="aura aura-silver mt-9">
-                <button className="btn btn-primary">Escuchar Ahora</button>
+                <button className="btn btn-primary" onClick={() => onNavigate && onNavigate('gallery')}>Escuchar Ahora</button>
               </div>
 
               <div className="aura aura-silver mt-9">
@@ -331,6 +332,7 @@ function App() {
     const path = window.location.hash;
     if (path.endsWith('/Tienda')) return 'shop';
     if (path.endsWith('/Checkout')) return 'checkout';
+    if (path.endsWith('/Galeria')) return 'gallery';
     return 'home';
   };
 
@@ -359,6 +361,7 @@ function App() {
     let newPath = '#/';
     if (page === 'shop') newPath = '#/Tienda';
     if (page === 'checkout') newPath = '#/Checkout';
+    if (page === 'gallery') newPath = '#/Galeria';
     window.history.pushState({}, '', newPath);
     setCurrentPage(page);
     window.scrollTo(0, 0); // Opcional: volver arriba al cambiar de vista
@@ -367,7 +370,9 @@ function App() {
   const renderPageContent = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePageContent />;
+        return <HomePageContent onNavigate={handleNavigation} />;
+      case 'gallery':
+        return <Gallery />;
       case 'shop':
         return <ShopPage onAddToCart={addToCart} />;
       case 'checkout':
