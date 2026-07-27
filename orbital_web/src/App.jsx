@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import ShopPage from './components/ShopPage';
 import CheckoutPage from './components/CheckoutPage';
 import Gallery from './components/Gallery';
+import Contact from './components/Contact';
 
 const HomePageContent = ({ onNavigate }) => {
   const root = useRef(null);
@@ -333,6 +334,7 @@ function App() {
     if (path.endsWith('/Tienda')) return 'shop';
     if (path.endsWith('/Checkout')) return 'checkout';
     if (path.endsWith('/Galeria')) return 'gallery';
+    if (path.endsWith('/Contacto')) return 'contact';
     return 'home';
   };
 
@@ -362,6 +364,7 @@ function App() {
     if (page === 'shop') newPath = '#/Tienda';
     if (page === 'checkout') newPath = '#/Checkout';
     if (page === 'gallery') newPath = '#/Galeria';
+    if (page === 'contact') newPath = '#/Contacto';
     window.history.pushState({}, '', newPath);
     setCurrentPage(page);
     window.scrollTo(0, 0); // Opcional: volver arriba al cambiar de vista
@@ -373,6 +376,8 @@ function App() {
         return <HomePageContent onNavigate={handleNavigation} />;
       case 'gallery':
         return <Gallery />;
+      case 'contact':
+        return <Contact />;
       case 'shop':
         return <ShopPage onAddToCart={addToCart} />;
       case 'checkout':
@@ -390,10 +395,10 @@ function App() {
   };
 
   return (
-    <div data-theme="orbitheme" className="min-h-screen relative pb-32">
+    <div data-theme="orbitheme" className={`min-h-screen relative ${currentPage !== 'contact' ? 'pb-32' : ''}`}>
       <Navbar currentPage={currentPage} setCurrentPage={handleNavigation} cart={cart} />
       {renderPageContent()}
-      <Footer />
+      {currentPage !== 'contact' && <Footer />}
     </div>
   )
 }

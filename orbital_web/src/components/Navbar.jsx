@@ -11,7 +11,7 @@ const Navbar = ({ currentPage, setCurrentPage, cart = [] }) => {
         <a className="btn btn-ghost text-xl" onClick={() => setCurrentPage('home')}>Inicio</a>
         <a className="btn btn-ghost" onClick={() => setCurrentPage('gallery')}>Galería</a>
         <a className="btn btn-ghost" onClick={() => setCurrentPage('shop')}>Tienda</a>
-        <a className="btn btn-ghost" href="#footer">Contacto</a>
+        <a className="btn btn-ghost" onClick={() => setCurrentPage('contact')}>Contacto</a>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
