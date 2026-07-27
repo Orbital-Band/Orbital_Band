@@ -63,6 +63,14 @@ export const INITIAL_VIDEOS = [
     thumbnail: "",
     category: "Teaser",
     description: "Un adelanto de la energía interestelar que verás en nuestros próximos conciertos."
+  },
+  {
+    id: 7,
+    title: "Maquinas en dojo",
+    url: "https://www.youtube.com/watch?v=LaW0NJBQF84",
+    thumbnail: "",
+    category: "Live set",
+    description: "El Kyatoch jsjsjs."
   }
 ];
 

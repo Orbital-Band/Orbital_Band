@@ -6,6 +6,18 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
   const subtotal = cart.reduce((sum, item) => sum + item.product.Precio * item.quantity, 0);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  const generateWhatsAppLink = () => {
+    let message = "Hola, quiero hacer un pedido:\n\n🛍️ *.:Detalle del Pedido:.*\n";
+    cart.forEach(item => {
+      const product = item.product;
+      const itemSubtotal = product.Precio * item.quantity;
+      message += `• *${item.quantity}x* ${product.Title} ($${product.Precio} c/u) - Subtotal: $${itemSubtotal}\n`;
+    });
+    message += `\n💵 *Total:* $${subtotal}`;
+    message += `\n¿Podría calcular mi envío por favor?`;
+    return `https://wa.me/525542454471?text=${encodeURIComponent(message)}`;
+  };
+
   const handlePay = () => {
     setIsPaid(true);
   };
@@ -26,13 +38,17 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
               </svg>
             </div>
           </div>
-          <h2 className="text-3xl font-extrabold text-success mb-2">¡Compra Exitosa!</h2>
+          <h2 className="text-3xl font-extrabold text-success mb-2">Enviar pedido</h2>
           <p className="text-base-content/70 mb-8">
-            Tu pago ha sido procesado correctamente. ¡Gracias por apoyar a la banda! Recibirás un correo de confirmación pronto.
+            Tu pedido se enviará por whatsapp. ¡Gracias por apoyar a la banda! Continúa en el chat.
           </p>
-          <button className="btn btn-success btn-block" onClick={handleSuccessClose}>
-            Regresar a la Tienda
-          </button>
+          <a href={generateWhatsAppLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleSuccessClose}
+            className="btn btn-success btn-block">
+            Enviar pedido por Whatsapp
+          </a>
         </div>
       </div>
     );
@@ -91,7 +107,7 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
                         alt={product.Title}
                         className="w-20 h-20 object-cover rounded-xl bg-base-200"
                       />
-                      
+
                       <div className="flex-grow">
                         <div className="flex justify-between items-start">
                           <div>
@@ -100,7 +116,7 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
                           </div>
                           <span className="font-bold text-lg">${product.Precio * item.quantity}</span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center mt-4">
                           {/* Quantity selector */}
                           <div className="join border border-base-content/10">
@@ -139,7 +155,7 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
           <div className="space-y-6">
             <div className="bg-base-100 rounded-2xl p-6 shadow-md border border-base-content/5">
               <h2 className="text-xl font-bold mb-6">Resumen de Orden</h2>
-              
+
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="opacity-70">Subtotal</span>
@@ -147,15 +163,15 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
                 </div>
                 <div className="flex justify-between">
                   <span className="opacity-70">Envío</span>
-                  <span className="text-success font-semibold">Gratis</span>
+                  <span className="text-success font-semibold">Por definir</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="opacity-70">Impuestos</span>
                   <span className="font-semibold">$0</span>
                 </div>
-                
+
                 <div className="divider"></div>
-                
+
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
                   <span className="text-accent text-2xl font-black">${subtotal}</span>
@@ -164,8 +180,7 @@ const CheckoutPage = ({ cart, updateQuantity, onNavigate, clearCart }) => {
 
               <div className="mt-8 space-y-3">
                 <button className="btn btn-primary btn-block btn-lg shadow-lg hover:shadow-primary/20 transition-all duration-300" onClick={handlePay}>
-                  Pagar Ahora
-                </button>
+                  Enviar Orden                </button>
                 <button className="btn btn-outline btn-block" onClick={() => onNavigate('shop')}>
                   Seguir Comprando
                 </button>
