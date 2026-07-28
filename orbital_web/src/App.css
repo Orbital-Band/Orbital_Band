@@ -2361,7 +2361,7 @@
 
 /* El prro efecto mamalon alv prro*/
 .imgelement:hover {
-  flex: 4;
+  flex: 8;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 

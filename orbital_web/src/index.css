@@ -1,7 +1,9 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: light, dark, synthwave, luxury, orbitheme;
 }
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -78,20 +80,24 @@ h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
+
   @media (max-width: 1024px) {
     font-size: 36px;
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
+
   @media (max-width: 1024px) {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }
@@ -114,7 +120,7 @@ code {
 /* PEGA AQUÍ TU CÓDIGO CSS GENERADO POR EL GENERADOR DE TEMAS */
 [data-theme="orbitheme"] {
   /* Aquí van las variables que copiaste, ej: --p: #...; --s: #...; */
-color-scheme: "dark";
+  color-scheme: "dark";
   --color-base-100: oklch(21.2% 0 56.043);
   --color-base-200: oklch(11.1% 0 49.250);
   --color-base-300: oklch(50.2% 0 0);

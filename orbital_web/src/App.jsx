@@ -8,6 +8,12 @@ import ShopPage from './components/ShopPage';
 import CheckoutPage from './components/CheckoutPage';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
+import SacroIMG from './assets/Sacro_1.webp';
+import LinesIMG from './assets/Sacro_2.webp';
+import EdyIMG from './assets/Edy_1.webp';
+import CarlosIMG from './assets/Carlos_1.webp';
+import CidIMG from './assets/Cid_3.webp';
+import BaziliIMG from './assets/Bazili_1.webp';
 
 const HomePageContent = ({ onNavigate }) => {
   const root = useRef(null);
@@ -265,30 +271,30 @@ const HomePageContent = ({ onNavigate }) => {
 
           {/* NUEVO: Fila de imágenes superior para móviles (Oculta en escritorio) */}
           <div className="grid grid-cols-3 gap-1 w-full w-full lg:hidden">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Bazili" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Lines" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80" alt="Sacro" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src={LinesIMG} alt="Lines" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src={SacroIMG} alt="Sacro" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src={EdyIMG} alt="Edy" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
           </div>
 
           {/* Izquierda: Primera paleta (Mantenida, pero oculta en móviles con 'hidden lg:flex') */}
           <div className="imgpalette hidden lg:flex">
             <div
               className="imgelement"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80')" }}
-            >
-              <span>Bazili</span>
-            </div>
-            <div
-              className="imgelement"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80')" }}
+              style={{ backgroundImage: `url(${LinesIMG})` }}
             >
               <span>Lines</span>
             </div>
             <div
               className="imgelement"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80')" }}
+              style={{ backgroundImage: `url(${SacroIMG})` }}
             >
               <span>Sacro</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: `url(${EdyIMG})` }}
+            >
+              <span>Edy</span>
             </div>
           </div>
 
@@ -311,29 +317,29 @@ const HomePageContent = ({ onNavigate }) => {
           <div className="imgpalette hidden lg:flex">
             <div
               className="imgelement"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80')" }}
+              style={{ backgroundImage: `url(${CidIMG})` }}
+            >
+              <span>Cid</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: `url(${CarlosIMG})` }}
+            >
+              <span>Carlos</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: `url(${BaziliIMG})` }}
             >
               <span>Bazili</span>
-            </div>
-            <div
-              className="imgelement"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80')" }}
-            >
-              <span>Lines</span>
-            </div>
-            <div
-              className="imgelement"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80')" }}
-            >
-              <span>Sacro</span>
             </div>
           </div>
 
           {/* NUEVO: Fila de imágenes superior para móviles (Oculta en escritorio) */}
           <div className="grid grid-cols-3 gap-1 w-full w-full lg:hidden">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Bazili" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Lines" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80" alt="Sacro" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src={CidIMG} alt="Cid" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src={CarlosIMG} alt="Carlos" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src={BaziliIMG} alt="Bazili" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
           </div>
 
         </div>
