@@ -259,23 +259,83 @@ const HomePageContent = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Sección 2: Bio */}
-      <div className="hero bg-base-200 min-h-[50vh] py-20">
-        <div className="hero-content flex-col lg:flex-row gap-10">
-          {/* <img
-            src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
-            className="w-full max-w-xs md:max-w-sm rounded-lg shadow-2xl"
-            alt="Música Orbital" /> */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold">MIEMBROS</h1>
-            <p className="text-xl md:text-xl font-bold">LINES - VOZ</p>
-            <p className="text-xl md:text-xl font-bold">SACRO - BAJO</p>
-            <p className="text-xl md:text-xl font-bold">EDY - GUITARRA SOLISTA</p>
-            <p className="text-xl md:text-xl font-bold">CID - GUITARRA RITMICA</p>
-            <p className="text-xl md:text-xl font-bold">CARLOS - BATERÍA</p>
-            <p className="text-xl md:text-xl font-bold">BAZILI - VIOLIN</p>
-            {/* <button className="btn btn-secondary">Conócenos</button> */}
+      {/* Sección de Miembros*/}
+      <div className="hero bg-base-200 min-h-[50vh] px-4">
+        <div className="hero-content flex-col lg:flex-row w-full max-w-7xl justify-between items-center gap-5">
+
+          {/* NUEVO: Fila de imágenes superior para móviles (Oculta en escritorio) */}
+          <div className="grid grid-cols-3 gap-1 w-full w-full lg:hidden">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Bazili" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Lines" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80" alt="Sacro" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
           </div>
+
+          {/* Izquierda: Primera paleta (Mantenida, pero oculta en móviles con 'hidden lg:flex') */}
+          <div className="imgpalette hidden lg:flex">
+            <div
+              className="imgelement"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80')" }}
+            >
+              <span>Bazili</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80')" }}
+            >
+              <span>Lines</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80')" }}
+            >
+              <span>Sacro</span>
+            </div>
+          </div>
+
+          {/* Centro: Card */}
+          <div className="card w-full max-w-md bg-base-50 shadow-sm">
+            <div className="card-body">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">MIEMBROS</h1>
+                <p className="text-2xl font-bold">LINES - VOZ</p>
+                <p className="text-2xl font-bold">SACRO - BAJO</p>
+                <p className="text-2xl font-bold">EDY - GUITARRA SOLISTA</p>
+                <p className="text-2xl font-bold">CID - GUITARRA RÍTMICA</p>
+                <p className="text-2xl font-bold">CARLOS - BATERÍA</p>
+                <p className="text-2xl font-bold">BAZILI - VIOLÍN</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Derecha: Segunda paleta (Mantenida, pero oculta en móviles con 'hidden lg:flex') */}
+          <div className="imgpalette hidden lg:flex">
+            <div
+              className="imgelement"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80')" }}
+            >
+              <span>Bazili</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80')" }}
+            >
+              <span>Lines</span>
+            </div>
+            <div
+              className="imgelement"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80')" }}
+            >
+              <span>Sacro</span>
+            </div>
+          </div>
+
+          {/* NUEVO: Fila de imágenes superior para móviles (Oculta en escritorio) */}
+          <div className="grid grid-cols-3 gap-1 w-full w-full lg:hidden">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Bazili" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Lines" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80" alt="Sacro" className="w-full h-[200px] aspect-square object-cover rounded-sm shadow-sm" />
+          </div>
+
         </div>
       </div>
 
