@@ -9,7 +9,7 @@ import CheckoutPage from './components/CheckoutPage';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import SacroIMG from './assets/Sacro_1.webp';
-import LinesIMG from './assets/Sacro_2.webp';
+import LinesIMG from './assets/Lines_1.webp';
 import EdyIMG from './assets/Edy_1.webp';
 import CarlosIMG from './assets/Carlos_1.webp';
 import CidIMG from './assets/Cid_3.webp';
